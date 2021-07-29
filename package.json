@@ -4,7 +4,8 @@
   "description": "Куплю. Продам",
   "main": "./src/service/service.js",
   "scripts": {
-    "start": "node ./src/service/service.js",
+    "start": "node ./src/service/service.js --server",
+    "generate": "node ./src/service/service.js --generate",
     "test": "npm run eslint",
     "eslint": "eslint --ext .js src/"
   },
