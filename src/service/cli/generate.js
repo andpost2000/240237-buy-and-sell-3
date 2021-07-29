@@ -1,7 +1,6 @@
 'use strict';
 
-const fs = require(`fs`);
-const util = require(`util`);
+const fs = require(`fs`).promises;
 const {exit} = require(`process`);
 const chalk = require(`chalk`);
 
@@ -33,12 +32,9 @@ const PictureRestrict = {
   MAX: 16,
 };
 
-const readFileAsync = util.promisify(fs.readFile);
-const writeFileAsync = util.promisify(fs.writeFile);
-
 const readContent = async (filePath) => {
   try {
-    const content = await readFileAsync(filePath, `utf8`);
+    const content = await fs.readFile(filePath, `utf8`);
     return content.trim().split(`\n`);
   } catch (err) {
     console.error(chalk.red(err));
@@ -67,14 +63,14 @@ module.exports = {
 
     const [count] = args;
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
-    const content = JSON.stringify(generateOffers(count, titles, categories, sentences));
+    const content = JSON.stringify(generateOffers(countOffer, titles, categories, sentences));
     if (countOffer > 1000) {
       console.info(chalk.yellow(`Не больше 1000 публикаций`));
       exit();
     }
 
     try {
-      writeFileAsync(FILE_NAME, content);
+      fs.writeFile(FILE_NAME, content);
       console.info(chalk.green(`Operation success. File created.`));
     } catch (err) {
       console.error(chalk.red(`Can't write data to file...`));
