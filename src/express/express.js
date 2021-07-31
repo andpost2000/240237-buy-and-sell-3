@@ -9,8 +9,12 @@ const registerRoutes = require(`./routes/register`);
 
 const DEFAULT_PORT = 8080;
 const app = express();
+const PUBLIC_DIR = `./src/express/public`;
 
-app.get(`/`, (req, res) => res.send(`This is start page`));
+app.use(express.static(PUBLIC_DIR));
+app.set(`views`, `./src/express/templates`);
+app.set(`view engine`, `pug`);
+app.get(`/`, (req, res) => res.render(`index`));
 
 app.use(`/offers`, offersRoutes);
 app.use(`/my`, myRoutes);
