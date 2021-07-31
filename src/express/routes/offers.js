@@ -6,8 +6,8 @@ const offersRouter = new Router();
 
 offersRouter.get(`/:id`, (req, res) => res.send(`/offers/:id ${req.params.id}`));
 offersRouter.get(`/category/:id`, (req, res) => res.send(`/offers/category/:id ${req.params.id}`));
-offersRouter.put(`/edit/:id`, (req, res) => res.send(`/offers/edit/:id ${req.params.id}`));
-offersRouter.post(`/add`, (req, res) => res.send(`/offers/add`));
+offersRouter.get(`/edit/:id`, (req, res) => res.send(`/offers/edit/:id ${req.params.id}`));
+offersRouter.get(`/add`, (req, res) => res.send(`/offers/add`));
 
 
 module.exports = offersRouter;
